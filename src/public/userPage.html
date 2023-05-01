@@ -5,10 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <p>Welcome User!</p>
+    <div id="picture-container"></div>
 
-    <button onClick="">Sign Out</button>
+
+    <button onClick="signout()">Sign out</button>
+    <script>
+        var images = [
+          "download.png",
+          "pokemon.png",
+          "dog.png"
+        ];
+  
+        // Function to display three random pictures
+        function displayRandomPictures() {
+          var pictureContainer = document.getElementById("picture-container");
+  
+          let randomNumber = Math.floor(Math.random() * images.length)
+      
+          var img = document.createElement('img')
+          img.src = images[randomNumber];
+          pictureContainer.append(img);
+          
+        }
+        // Call the displayRandomPictures function when the page is loaded
+        window.onload = displayRandomPictures;
+      </script>
+    <script>
+        function signout() {
+            $.ajax({
+                url: '/api/signout', // the URL to send the request to
+                method: 'POST', // the HTTP method to use (GET, POST, etc.)
+                dataType: 'json', // the expected data type of the response
+                success: function(response) { // callback function to handle successful response
+                    console.log(response);
+                    window.location.reload;
+                },
+            })
+            return;
+        }
+    </script>
 </body>
 </html>

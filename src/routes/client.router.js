@@ -3,6 +3,7 @@ import {
   getSignUp,
   getHomePage,
   getLogin,
+  getUserPage,
 } from "../controllers/clientController.js";
 
 export const clientRouter = () => {
@@ -11,6 +12,7 @@ export const clientRouter = () => {
   router.get("/", getHomePage);
   router.get("/signup", getSignUp);
   router.get("/login", getLogin);
+  router.get("/userPage", getUserPage);
 
   return router;
 };

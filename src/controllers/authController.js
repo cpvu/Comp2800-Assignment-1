@@ -4,10 +4,6 @@ import path from "path";
 
 export const postSignup = async (req, res) => {
   const { username, password } = req.body;
-  //validator
-
-  console.log(username);
-  console.log(password);
 
   let usernameExists = await userModel.findOne({ username: username });
 
@@ -48,9 +44,20 @@ export const postLogin = async (req, res) => {
       req.session.cookie.maxAge = 600000;
       req.session.authenticated = true;
     }
-    return res.redirect("http://localhost:8000/");
+    return res.redirect("http://localhost:8000/userPage");
   }
   return res.send(
     "Invalid credentials! <a href='/login'><button>Try again</button></a>"
   );
+};
+
+export const postSignOut = async (req, res) => {
+  console.log(req.session.authenticated);
+  if (req.session.authenticated == true) {
+    req.session.authenticated = false;
+    req.session.cookie.maxAge = 1;
+
+    res.redirect("/");
+  }
+  res.status(400).end();
 };
