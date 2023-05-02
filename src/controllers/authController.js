@@ -49,7 +49,7 @@ export const postLogin = async (req, res) => {
       req.session.cookie.maxAge = 600000;
       req.session.authenticated = true;
     }
-    return res.redirect("http://localhost:8000/userPage");
+    return res.redirect("/userPage");
   }
   return res.send(
     "Invalid credentials! <a href='/login'><button>Try again</button></a>"
