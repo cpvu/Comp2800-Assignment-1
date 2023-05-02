@@ -1,5 +1,4 @@
 import { expressInstance } from "./server.js";
-import http from "http";
 
 (async () => {
   const server = http.createServer(expressInstance());
