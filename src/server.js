@@ -1,5 +1,5 @@
 import * as dotenv from "dotenv";
-import express, { urlencoded } from "express";
+import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import path from "path";
