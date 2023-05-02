@@ -28,7 +28,12 @@ export const postSignup = async (req, res) => {
   }
 
   console.log("User successfully registered!");
-  const signUpPath = path.join(path.resolve(), "public", "signupSuccess.html");
+  const signUpPath = path.join(
+    path.resolve(),
+    "src",
+    "public",
+    "signupSuccess.html"
+  );
   res.sendFile(signUpPath);
 };
 
