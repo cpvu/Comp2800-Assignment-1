@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node src",
+    "dev": "nodemon src/index.js",
     "build": "npm update && webpack"
   },
   "engines": {
@@ -26,6 +27,7 @@
     "express-session": "^1.17.3",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
+    "joi": "^17.9.2",
     "mock-aws-s3": "^4.0.2",
     "mongoose": "^7.1.0",
     "nock": "^13.3.1",

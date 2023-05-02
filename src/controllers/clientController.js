@@ -31,6 +31,7 @@ export const getUserPage = (req, res) => {
       "public",
       "userPage.html"
     );
+    console.log(userPagePath);
     res.sendFile(userPagePath);
   } else {
     res.status(400).redirect("/");

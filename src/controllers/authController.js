@@ -1,20 +1,34 @@
 import bcrypt from "bcrypt";
 import { userModel } from "../models/authSchema.js";
 import path from "path";
+import Joi from "joi";
+import { handleAuthValidate } from "../validator/validation.js";
 
 export const postSignup = async (req, res) => {
   const { username, password } = req.body;
 
+  const usernameError = handleAuthValidate(req.body);
+
+  if (usernameError.error != null) {
+    console.log(usernameError.error);
+    return res
+      .status(400)
+      .send(
+        `<p>${usernameError.error}</p> <a href='/signup'><button>Return to sign up</button></a>`
+      );
+  }
+
   let usernameExists = await userModel.findOne({ username: username });
 
   if (usernameExists) {
-    res.send(
-      "Username already exists <a href='/signup'><button>Return to sign up</button></a>"
-    );
+    return res
+      .status(400)
+      .send(
+        `<p>Username taken!</p> <a href='/signup'><button>Return to sign up</button></a>`
+      );
   }
 
   const hashedPassword = bcrypt.hashSync(password.toString(), 12);
-  console.log(hashedPassword);
 
   const userSuccess = new userModel({
     username: username,
@@ -28,17 +42,18 @@ export const postSignup = async (req, res) => {
   }
 
   console.log("User successfully registered!");
-  const signUpPath = path.join(
-    path.resolve(),
-    "src",
-    "public",
-    "signupSuccess.html"
-  );
-  res.sendFile(signUpPath);
+  res.status(200).redirect("/userPage");
 };
 
 export const postLogin = async (req, res) => {
   const { username, password } = req.body;
+
+  const usernameError = handleAuthValidate();
+
+  if (usernameError.error != null) {
+    console.log(usernameError.error);
+    return res.status(400).redirect("/login");
+  }
 
   const validateUser = await userModel.findOne({
     username: username,
@@ -49,7 +64,8 @@ export const postLogin = async (req, res) => {
       req.session.cookie.maxAge = 600000;
       req.session.authenticated = true;
     }
-    return res.redirect("/userPage");
+    res.redirect("/userPage");
+    return;
   }
   return res.send(
     "Invalid credentials! <a href='/login'><button>Try again</button></a>"
@@ -57,12 +73,10 @@ export const postLogin = async (req, res) => {
 };
 
 export const postSignOut = async (req, res) => {
-  console.log(req.session.authenticated);
   if (req.session.authenticated == true) {
-    req.session.authenticated = false;
-    req.session.cookie.maxAge = 1;
-
+    req.session.destroy();
     res.redirect("/");
+    return;
   }
   res.status(400).end();
 };

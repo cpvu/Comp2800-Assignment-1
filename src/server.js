@@ -9,7 +9,7 @@ import { apiRouter, catchRouter, clientRouter } from "./routes/index.js";
 import mongoose from "mongoose";
 
 dotenv.config();
-export const root = path.join(path.resolve(), "public");
+export const root = path.join(path.resolve(), "src", "public");
 
 export let expressInstance = () => {
   try {
@@ -19,6 +19,7 @@ export let expressInstance = () => {
     });
 
     const app = express();
+    console.log(root);
 
     app.use(express.static(root));
     app.use(cors({ credentials: true }));
