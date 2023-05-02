@@ -1,9 +1,18 @@
 module.exports = {
   // ... other configuration options
+  module: {
+    rules: [
+      {
+        test: /\.html$/i,
+        use: ["html-loader"],
+      },
+    ],
+  },
   resolve: {
     fallback: {
       fs: false,
       path: false,
+      constants: false,
       crypto: false,
       stream: false,
       buffer: false,
@@ -19,6 +28,7 @@ module.exports = {
       child_process: false,
       process: false,
       timers: false,
+      console: false,
     },
   },
 };
