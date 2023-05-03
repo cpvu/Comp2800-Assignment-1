@@ -42,6 +42,7 @@ export const postSignup = async (req, res) => {
   }
 
   console.log("User successfully registered!");
+
   res.status(200).redirect("/userPage");
 };
 
