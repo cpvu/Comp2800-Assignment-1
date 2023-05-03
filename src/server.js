@@ -19,8 +19,8 @@ export let expressInstance = () => {
     });
 
     const app = express();
-    console.log(root);
 
+    app.set("view engine", "ejs");
     app.use(express.static(root));
     app.use(cors({ credentials: true }));
     app.use(bodyParser.urlencoded({ extended: true }));
