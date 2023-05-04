@@ -2,7 +2,9 @@
     <p>Welcome User!</p>
     <div id="picture-container"></div>
 
+    <a href="/"><button>Home</button></a>
     <button onClick="signout()">Sign out</button>
+
     <script>
         var images = [
           "download.png",
@@ -25,16 +27,9 @@
         window.onload = displayRandomPictures;
       </script>
     <script>
-        function signout() {
-            $.ajax({
-                url: '/api/signout', // the URL to send the request to
-                method: 'POST', // the HTTP method to use (GET, POST, etc.)
-                dataType: 'json', // the expected data type of the response
-                success: function(response) { // callback function to handle successful response
-                    console.log(response);
-                    window.location.reload;
-                },
-            })
+        async function signout() {
+            await fetch("http://localhost:8000/api/signout", {method: 'POST', body: 'a=1'});
+            window.location.reload;
             return;
         }
     </script>

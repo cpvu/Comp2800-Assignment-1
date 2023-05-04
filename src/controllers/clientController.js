@@ -2,9 +2,10 @@ import path from "path";
 
 export const getHomePage = (req, res) => {
   if (req.session.authenticated == true) {
-    res.redirect("/userPage");
+    res.render("home", {buttonNameOne: "Member Page", buttonNameTwo: "Log Out", routeOne: "/userPage", routeTwo: "/", authenticated: true})
+  } else {
+    res.render("home", {buttonNameOne: "Sign Up", buttonNameTwo: "Login",  routeOne: "/signup", routeTwo: "/login", authenticated: false});
   }
-  res.render(path.join(path.resolve(), "src", "views", "home"));
 };
 
 export const getSignUp = (req, res) => {

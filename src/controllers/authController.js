@@ -52,7 +52,6 @@ export const postLogin = async (req, res) => {
   const usernameError = handleAuthValidate();
 
   if (usernameError.error != null) {
-    console.log(usernameError.error);
     return res.status(400).redirect("/login");
   }
 
@@ -75,9 +74,14 @@ export const postLogin = async (req, res) => {
 
 export const postSignOut = async (req, res) => {
   if (req.session.authenticated == true) {
+    console.log("se")
     req.session.destroy();
-    res.redirect("/");
+    res.render("home", {buttonNameOne: "Sign Up", buttonNameTwo: "Login",  routeOne: "/signup", routeTwo: "/login", authenticated: false});
     return;
+
+  } else {
+    console.log("l")
+    res.status(400).end();
   }
-  res.status(400).end();
+
 };

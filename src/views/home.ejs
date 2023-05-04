@@ -1,5 +1,26 @@
 <% - include ("templates/header") %>
-    <header>Welcome to my page!</header>
-    <a href ="/signup"><button>Sign Up</button></a>
-    <a href="/login"><button>Login</button></a>
-<% - include ("templates/footer")
+    <header>Welcome!</header>
+
+    <% if (authenticated) { %>
+        <a href="<%- routeOne %>"><button><%- buttonNameOne %></button></a>
+        <button onClick="signout()"><%- buttonNameTwo %></button>
+      <% } else { %>
+        <a href="<%- routeOne %>"><button><%- buttonNameOne %></button></a>
+        <a href="<%- routeTwo %>"><button ><%- buttonNameTwo %></button></a>
+      <% } %>
+      
+      <script>
+        async function signout() {
+            try {
+                console.log('hello')
+                await fetch("http://localhost:8000/api/signout", {method: 'POST', body: 'a=1'});
+            } catch (e) {
+                console.log(e);
+            }
+        
+            return;
+        }
+    </script>
+
+   
+<% - include ("templates/footer") %>
