@@ -21,6 +21,7 @@ export let expressInstance = () => {
     const app = express();
 
     app.set("view engine", "ejs");
+    app.set('views', path.join(path.resolve(), "src", 'views/'));
     app.use(express.static(root));
     app.use(cors({ credentials: true }));
     app.use(bodyParser.urlencoded({ extended: true }));
