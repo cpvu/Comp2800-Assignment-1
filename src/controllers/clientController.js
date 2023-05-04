@@ -11,16 +11,16 @@ export const getSignUp = (req, res) => {
   if (req.session.authenticated == true) {
     res.redirect("/userPage");
   }
-  const signUpPath = path.join(path.resolve(), "src", "views", "signup.html");
-  res.sendFile("signup");
+  const signUpPath = path.join(path.resolve(), "src", "views", "signup");
+  res.render(signUpPath);
 };
 
 export const getLogin = (req, res) => {
   if (req.session.authenticated == true) {
     res.redirect("/userPage");
   }
-  const loginPath = path.join(path.resolve(), "src", "views", "login.html");
-  res.sendFile(loginPath);
+  const loginPath = path.join(path.resolve(), "src", "views", "login");
+  res.render(loginPath);
 };
 
 export const getUserPage = (req, res) => {
@@ -28,11 +28,11 @@ export const getUserPage = (req, res) => {
     const userPagePath = path.join(
       path.resolve(),
       "src",
-      "public",
-      "userPage.html"
+      "views",
+      "userPage"
     );
     console.log(userPagePath);
-    res.sendFile(userPagePath);
+    res.render(userPagePath);
   } else {
     res.status(400).redirect("/");
   }
