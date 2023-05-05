@@ -1,12 +1,12 @@
-<% - include ("templates/header") %>
+<%- include("templates/header") %>
     <header>Welcome!</header>
 
     <% if (authenticated) { %>
-        <a href="<%- routeOne %>"><button><%- buttonNameOne %></button></a>
-        <button onClick="signout()"><%- buttonNameTwo %></button>
+        <a href="<%- routeOne %>"><button class="btn btn-primary"><%- buttonNameOne %></button></a>
+        <button onClick="signout()" class="btn btn-primary"><%- buttonNameTwo %></button>
       <% } else { %>
-        <a href="<%- routeOne %>"><button><%- buttonNameOne %></button></a>
-        <a href="<%- routeTwo %>"><button ><%- buttonNameTwo %></button></a>
+        <a href="<%- routeOne %>"><button class="btn btn-primary"><%- buttonNameOne %></button></a>
+        <a href="<%- routeTwo %>"><button class="btn btn-primary"><%- buttonNameTwo %></button></a>
       <% } %>
       
       <script>

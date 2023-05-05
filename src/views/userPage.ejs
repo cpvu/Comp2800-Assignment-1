@@ -1,9 +1,47 @@
-<% - include ("templates/header") %>
+<%- include("templates/header") %>
+<nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Calvin's WebSite</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            
+        <a href="/"><button>Home</button></a>
+          </li>
+          <li class="nav-item">
+            <button onClick="signout()">Log out</button>
+          </li>
+        </ul>
+        <form role="search">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+        </form>
+      </div>
+    </div>
+  </nav>
+
     <p>Welcome User!</p>
     <div id="picture-container"></div>
+    <div class="container text-center">
+        <div class="row">
+          <div class="col">
+            <div id="image1"></div>
+          </div>
+          <div class="col">
+            <div id="image2"></div>
+          </div>
+          <div class="col">
+            <div id="image3"></div>
+          </div>
+        </div>
+      </div>
+    
+    <div id="userPageInterface">
 
-    <a href="/"><button>Home</button></a>
-    <button onClick="signout()">Sign out</button>
+    </div>
 
     <script>
         var images = [
@@ -11,17 +49,28 @@
           "pokemon.png",
           "dog.png"
         ];
+
+        
   
         // Function to display three random pictures
         function displayRandomPictures() {
-          var pictureContainer = document.getElementById("picture-container");
-  
-          let randomNumber = Math.floor(Math.random() * images.length)
-      
-          var img = document.createElement('img')
-          img.src = images[randomNumber];
-          pictureContainer.append(img);
-          
+
+
+          let imageOne = document.getElementById("image1");
+          let imageTwo = document.getElementById("image2");
+          let imageThree = document.getElementById("image3");
+
+          let imageContainersArray = [imageOne, imageTwo, imageThree];
+
+          for (let i = 0; i < imageContainersArray.length; i++) {
+
+            var img = document.createElement('img')
+            img.src = images[i];
+
+            imageContainersArray[i].append(img);
+          }
+
+          return;
         }
         // Call the displayRandomPictures function when the page is loaded
         window.onload = displayRandomPictures;

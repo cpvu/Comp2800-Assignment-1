@@ -1,5 +1,4 @@
-<% - include ("templates/header") %>
-    
+<%- include("templates/header") %>
 <script>
     async function handlePromoteAdmin(newAdmin) {
         try {
@@ -36,8 +35,8 @@
 
     <% for (let i = 0; i < users.length; i++) { %> 
         <Label><%- users[i].username -%> (<%- users[i].userType -%>)</Label> 
-        <button onClick="handlePromoteAdmin('<%- users[i].username -%>')">Promote to Admin</button>
-        <button onClick="handleDemoteAdmin('<%- users[i].username -%>')">Demote to User</button>
+        <button class="btn btn-success"onClick="handlePromoteAdmin('<%- users[i].username -%>')">Promote to Admin</button>
+        <button class="btn btn-danger" onClick="handleDemoteAdmin('<%- users[i].username -%>')">Demote to User</button>
         <br></br>
     <% } %> 
 

@@ -9,20 +9,21 @@ import { apiRouter, catchRouter, clientRouter } from "./routes/index.js";
 import mongoose from "mongoose";
 
 dotenv.config();
-export const root = path.join(path.resolve(), "src", "public");
+
 
 export let expressInstance = () => {
+  const root = path.join(path.resolve(), "src", "public");
+
   try {
     mongoose.connect(process.env.MONGO_URL, {
       dbName: "Comp_Two",
       keepAlive: true,
     });
-
+    console.log(root)
     const app = express();
-
-    app.set("view engine", "ejs");
-    app.set('views', path.join(path.resolve(), "src", 'views/'));
     app.use(express.static(root));
+    app.set("view engine", "ejs");
+    app.set('views', path.join(path.resolve(), "src", 'views'));
     app.use(cors({ credentials: true }));
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
