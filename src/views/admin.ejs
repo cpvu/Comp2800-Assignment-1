@@ -1,0 +1,45 @@
+<% - include ("templates/header") %>
+    
+<script>
+    async function handlePromoteAdmin(newAdmin) {
+        try {
+            await fetch("http://localhost:8000/api/admin/addAdmin", {
+                method: 'POST', 
+                headers: {
+                            'Content-Type': 'application/json'
+                         },
+                body: JSON.stringify({username: newAdmin})});
+        } catch (err) {
+            console.log(err)
+        }
+        
+        return; 
+    };
+
+    async function handleDemoteAdmin(newUser) {
+        try {
+            await fetch("http://localhost:8000/api/admin/removeAdmin", {
+                method: 'POST', 
+                headers: {
+                            'Content-Type': 'application/json'
+                         },
+                body: JSON.stringify({username: newUser})});
+        } catch (err) {
+            console.log(err)
+        }
+        
+        return; 
+    };
+</script>
+    <h1>Admin Dashboard</h1>
+    <h2>Users</h2>
+
+    <% for (let i = 0; i < users.length; i++) { %> 
+        <Label><%- users[i].username -%> (<%- users[i].userType -%>)</Label> 
+        <button onClick="handlePromoteAdmin('<%- users[i].username -%>')">Promote to Admin</button>
+        <button onClick="handleDemoteAdmin('<%- users[i].username -%>')">Demote to User</button>
+        <br></br>
+    <% } %> 
+
+
+<% - include ("templates/footer") %>

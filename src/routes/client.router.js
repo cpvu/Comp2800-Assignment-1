@@ -4,6 +4,7 @@ import {
   getHomePage,
   getLogin,
   getUserPage,
+  getAdminPage,
 } from "../controllers/clientController.js";
 
 export const clientRouter = () => {
@@ -13,6 +14,7 @@ export const clientRouter = () => {
   router.get("/signup", getSignUp);
   router.get("/login", getLogin);
   router.get("/userPage", getUserPage);
+  router.get("/admin", getAdminPage);
 
   return router;
 };

@@ -63,6 +63,7 @@ export const postLogin = async (req, res) => {
     if (bcrypt.compareSync(password.toString(), validateUser.password)) {
       req.session.cookie.maxAge = 600000;
       req.session.authenticated = true;
+      req.session.username = username; 
     }
     res.redirect("/userPage");
     return;
@@ -85,3 +86,33 @@ export const postSignOut = async (req, res) => {
   }
 
 };
+
+export const postAddAdmin = async (req, res) => {
+  if (req.session.authenticated)  {
+    const validateAdmin = await userModel.findOne({username: req.session.username}) 
+
+    if (validateAdmin.userType == "admin") {
+      const username = req.body.username;
+      await userModel.findOneAndUpdate({username: username}, {userType: "admin"}); 
+      console.log(`${username} updated to an Admin!`)
+
+      return res.status(200).json({status: "Updated", user: username});
+    } 
+  }
+  res.status(401).json({status: "Not allowed"});
+}
+
+export const postRemoveAdmin = async (req, res) => {
+  if (req.session.authenticated)  {
+    const validateAdmin = await userModel.findOne({username: req.session.username}) 
+
+    if (validateAdmin.userType == "admin") {
+      const username = req.body.username;
+      await userModel.findOneAndUpdate({username: username}, {userType: "user"}); 
+      console.log(`User: ${username} updated to a user`)
+
+      return res.status(200).json({status: "Updated", user: username});
+    } 
+  }
+  res.status(401).json({status: "Not allowed"});
+}

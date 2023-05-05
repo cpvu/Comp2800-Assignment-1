@@ -1,4 +1,5 @@
 import path from "path";
+import { userModel } from "../models/authSchema.js";
 
 export const getHomePage = (req, res) => {
   if (req.session.authenticated == true) {
@@ -38,3 +39,16 @@ export const getUserPage = (req, res) => {
     res.status(400).redirect("/");
   }
 };
+
+export const getAdminPage = async (req, res) => {
+  if (req.session.authenticated)  {
+    const validateAdmin = await userModel.findOne({username: req.session.username}) 
+
+    if (validateAdmin.userType == "admin") {
+      const users = await userModel.find();
+      return res.render("admin", {users: users});
+    } 
+  }
+
+  return res.status(401).send("Unauthorized access");
+}
