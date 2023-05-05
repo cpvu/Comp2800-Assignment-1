@@ -32,6 +32,7 @@ export let expressInstance = () => {
         secret: "secret",
         saveUninitialized: true,
         authenticated: Boolean,
+        username: String,
         cookie: { maxAge: 0 },
         resave: false,
         store: MongoStore.create({
