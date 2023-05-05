@@ -1,13 +1,20 @@
-<% - include ("templates/header") %>
-    <header style = "font-size: 50px; margin-bottom: 25px;">Sign up</header>
+<%- include("templates/header") %>
+    <header style="font-size: 50px; margin-bottom: 25px;">Sign up</header>
     <p>Welcome! Please signup with a username and password</p>
-    <form method="POST" action = "/api/signup">
-        <label>Username:</label>
-        <input type="text" name = "username" placeholder="Enter username">
+    <form method="POST" action="/api/signup">
+        <div class="form-outline mb-4">
+            <label class="form-label" for="userNameForm"></label>
+            <input type="text" class="form-control" id="userNameForm" name="username" placeholder="Enter username">
+        </div>
 
-        <label>Password:</label>
-        <input type="text" name="password" placeholder="Enter password">
-        <input type="submit" name="Submit" placeholder="Sign up">
+
+        <input type="text" id="userPasswordForm" class="form-control" name="password" placeholder="Enter password">
+        <label class="form-label" for="userPasswordForm"></label>
+
+        <div id="registrationSubmit">
+            <input type="submit" class="btn btn-primary btn-block mb-4" name="Sign Up" placeholder="Sign up">
+        </div>
+        
     </form>
     <div id="feedback"></div>
-<% - include ("templates/footer") %>
+    <% - include ("templates/footer") %>
