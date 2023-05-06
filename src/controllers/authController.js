@@ -75,7 +75,6 @@ export const postLogin = async (req, res) => {
 
 export const postSignOut = async (req, res) => {
   if (req.session.authenticated == true) {
-    console.log("se")
     req.session.destroy();
     res.render("home", {buttonNameOne: "Sign Up", buttonNameTwo: "Login",  routeOne: "/signup", routeTwo: "/login", authenticated: false});
     return;

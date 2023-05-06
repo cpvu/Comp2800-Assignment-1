@@ -2,7 +2,7 @@
 <script>
     async function handlePromoteAdmin(newAdmin) {
         try {
-            await fetch("http://localhost:8000/api/admin/addAdmin", {
+            await fetch("/api/admin/addAdmin", {
                 method: 'POST', 
                 headers: {
                             'Content-Type': 'application/json'
@@ -17,7 +17,7 @@
 
     async function handleDemoteAdmin(newUser) {
         try {
-            await fetch("http://localhost:8000/api/admin/removeAdmin", {
+            await fetch("/api/admin/removeAdmin", {
                 method: 'POST', 
                 headers: {
                             'Content-Type': 'application/json'

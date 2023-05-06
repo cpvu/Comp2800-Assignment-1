@@ -12,8 +12,7 @@
       <script>
         async function signout() {
             try {
-                console.log('hello')
-                await fetch("http://localhost:8000/api/signout", {method: 'POST', body: 'a=1'});
+                await fetch("/api/signout", {method: 'POST', body: 'a=1'});
             } catch (e) {
                 console.log(e);
             }
